@@ -7,7 +7,7 @@ using Telegram.Bot.Types;
 [Route("/")]
 public class BotController : ControllerBase
 {
-    private TelegramBotClient bot = Bot.GetTelegramBot();
+    // private TelegramBotClient bot = Bot.GetTelegramBot();
 
     [HttpPost]
         public async Task<IActionResult> Post(
@@ -22,8 +22,6 @@ public class BotController : ControllerBase
     [HttpGet]
     public string Get()
     {
-        //Здесь мы пишем, что будет видно если зайти на адрес,
-        //указаную в ngrok и launchSettings
-        return "Telegram bot was started";
+        return "Telegram bot was started. Bot: @udsubot Creator: @mosinisom";
     }
 }

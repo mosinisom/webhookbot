@@ -486,3 +486,4 @@ appsettings.json
 appsettings.Development.json
 Properties/launchSettings.json
 webhookbot.http
+Migrations

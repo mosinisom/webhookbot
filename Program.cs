@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Telegram.Bot;
 using Telegram.Bot.Services;
@@ -11,8 +12,12 @@ public class Program
 
         builder.Services.AddSingleton<ITelegramBotClient>(new TelegramBotClient(builder.Configuration.GetSection("BotConfiguration:BotToken").Value));
         builder.Services.AddScoped<UpdateHandlers>();
+        builder.Services.AddScoped<AppController>();
+        builder.Services.AddScoped<DbService>();
+        builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionString")), ServiceLifetime.Singleton);
 
-        builder.Services.AddControllers().AddNewtonsoftJson(); //<- вот сюда
+
+        builder.Services.AddControllers().AddNewtonsoftJson(); 
 
         var app = builder.Build();
 

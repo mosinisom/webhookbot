@@ -10,11 +10,13 @@ public partial class UpdateHandlers
 {
     private readonly ITelegramBotClient _botClient;
     private readonly ILogger<UpdateHandlers> _logger;
+    private readonly AppController _appController;
 
-    public UpdateHandlers(ITelegramBotClient botClient, ILogger<UpdateHandlers> logger)
+    public UpdateHandlers(ITelegramBotClient botClient, ILogger<UpdateHandlers> logger, AppController appController)
     {
         _botClient = botClient;
         _logger = logger;
+        _appController = appController;
     }
 
     public Task HandleErrorAsync(Exception exception, CancellationToken cancellationToken)
@@ -44,7 +46,7 @@ public partial class UpdateHandlers
         await handler;
     }
 
-        // Go to "UH + Update Type" files to see the rest of the code
+        // Go to "UH + Update Type" files to see other parts of the UpdateHandlers class
 
 
     private Task UnknownUpdateHandlerAsync(Update update, CancellationToken cancellationToken)
