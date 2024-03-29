@@ -10,9 +10,9 @@ public partial class UpdateHandlers
 {
     private readonly ITelegramBotClient _botClient;
     private readonly ILogger<UpdateHandlers> _logger;
-    private readonly AppController _appController;
+    private readonly UserInteractionController _appController;
 
-    public UpdateHandlers(ITelegramBotClient botClient, ILogger<UpdateHandlers> logger, AppController appController)
+    public UpdateHandlers(ITelegramBotClient botClient, ILogger<UpdateHandlers> logger, UserInteractionController appController)
     {
         _botClient = botClient;
         _logger = logger;
@@ -53,7 +53,7 @@ public partial class UpdateHandlers
     {
         _logger.LogInformation("Unknown update type: {UpdateType}", update.Type);
         if(update.Message?.Chat.Id == null) return Task.CompletedTask;
-        _botClient.SendTextMessageAsync(update.Message.Chat.Id, "Я не знаю, что делать с этим, напиши Саше М.");
+        _botClient.SendTextMessageAsync(update.Message.Chat.Id, "Я не знаю, что делать с этим, напиши Саше М.", cancellationToken: cancellationToken);
         return Task.CompletedTask;
     }
 }

@@ -186,15 +186,15 @@ public class DbService : IDisposable
         //         .FirstOrDefaultAsync();
 
         return await _context.Users.FromSqlRaw
-            (@" IF EXISTS (SELECT * FROM Bannedusers WHERE User_id = (SELECT User_id FROM Users WHERE Chat_id = {0}))
-                SELECT * FROM Users WHERE Chat_id = {0}
+            (@"IF EXISTS (SELECT * FROM Bannedusers WHERE User_id = (SELECT User_id FROM Users WHERE Chat_id = {0}))
+                SELECT * FROM Users WHERE Id = {0}
                 ELSE
                 SELECT * FROM Users
-                LEFT JOIN Bannedusers ON Users.User_id = Bannedusers.User_id
-                LEFT JOIN Photos ON Users.User_id = Photos.Owner_chat_id
+                LEFT JOIN Bannedusers ON Users.Id = Bannedusers.User_id
+                LEFT JOIN Photos ON Users.Id = Photos.Owner_chat_id
                 WHERE Bannedusers.User_id IS NULL
                 AND Photos.Path IS NOT NULL
-                AND Users.User_id != (SELECT User_id FROM Users WHERE Chat_id = {0})
+                AND Users.Id != (SELECT Id FROM Users WHERE Chat_id = {0})
                 ORDER BY RANDOM()
                 LIMIT 1", chatId)
             .FirstOrDefaultAsync();

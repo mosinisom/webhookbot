@@ -1,6 +1,6 @@
 using Telegram.Bot.Types;
 
-public class AppController
+public class UserInteractionController
 {
     enum State
     {
@@ -16,9 +16,9 @@ public class AppController
     }
 
     DbService _db;
-    ILogger<AppController> _log;
+    ILogger<UserInteractionController> _log;
 
-    public AppController(DbService db, ILogger<AppController> log)
+    public UserInteractionController(DbService db, ILogger<UserInteractionController> log)
     {
         _db = db;
         _log = log;
@@ -168,6 +168,19 @@ public class AppController
         }
         return user;
     }
+
+    public async Task BanUser(long chatId, string reason = "Good reason")
+    {
+        await _db.BanUser(chatId, reason);
+        _log.LogInformation("BanUser. ChatId: {chatId}, reason: {reason}", chatId, reason);
+    }
+
+    public async Task UnbanUser(long chatId)
+    {
+        await _db.UnbanUser(chatId);
+        _log.LogInformation("UnbanUser. ChatId: {chatId}", chatId);
+    }
+
 
 
 
