@@ -34,6 +34,4 @@ public class Program
     }
 }
 
-// https://api.telegram.org/bot5176931114:AAFb9QIicvqaXe2o8Vr5s35sIWMK2gIS3jY/setWebhook?url=https://02cd-85-193-95-75.ngrok-free.app 
 
-// https://d230-85-193-95-75.ngrok-free.app 
